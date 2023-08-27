@@ -224,3 +224,227 @@
 # Ex. If you have a books table with columns publisher_name and publisher_address, the publisher_address and publisher_name 
 # should be separated into a separate table and linked to books with a foreign key. The publisher_address is dependent on the 
 # publisher_name and neither column is a key column.
+
+# *Connecting to MySQL Server
+# Now that you have installed, configured, and started a MySQL server on our operating system, we can 
+# now connect to it with MySQL Workbench.
+
+# Open up MySQL Workbench, which will bring up a main menu showing your different DB connections. 
+# Most of you will only have one, unless you have added more.  Select the wrench icon to test and 
+# configure your connections.
+
+# Here you will notice the Hostname: 127.0.0.1 (the IP address for localhost), Port, and Username. 
+# Here you can change the port number if your MySQL server is on a different port. Test the 
+# connection with the button at the bottom of this menu.
+
+# *Changing your port
+# If you wish to change the port on the MySQL server, you can do so by adding a configuration file to 
+# a specific directory path depending on your OS.  If you do change your port here, make sure that 
+# your connection settings in MySQL Workbench also reflects this change.
+
+# Let's say we wanted to change the port our server is listening on to 3307 (instead of the default 
+# 3306). Create a file named my.cnf (the name is important), and add the following text:
+
+# [client]
+# port = 3307
+# [mysqld]
+# port = 3307
+
+# Make sure this file gets saved to one the following directories, depending on your OS
+
+# /etc/my.cnf
+
+# Mac:
+# Stop and restart the MySQL server via MySQL preference pane.
+
+# *Forward Engineer:
+# 
+# *To create the database:
+# (Be sure the MySQL server is running on your OS.)
+# 1. Select Database -> Forward Engineer.
+# 2. Be sure the credentials are correct for MySQL server and select continue.
+# 3. If you need to replace a database you have already created, select `Generate DROP SCHEMA`, otherwise select continue.  **Note** Generate DROP SCHEMA will also delete any data you have already stored for the selected schema.
+# 4. Enter password if prompted.
+# 5. Select continue.
+# 6. Select Save to File... and move saved file to the project folder.
+# 7. Upon a successful Forward engineer process, all tasks should have a green check.  Select close to continue.
+
+
+# *To view the database created:
+# 1. Select the MySQL connections icon and connect.
+# 2. Select the refresh option next to schema, if the created schema does not appear in the list.
+# 3. You are ready to write and run SQL queries.  You can either double click on the schema name or add use <schema_name>; to the top of the query file to connect to the schema.
+
+# *Import From twitter.sql
+# Go ahead and download the  twitter.sql file. Copy and paste what is in the .sql file into your MySQL Workbench editor. The ERD of the database is as follows:
+
+
+# Alternative Way of Running SQL queries:
+
+
+# *users 
+# Let's see what's in the users table by running:
+
+# SELECT * 
+# FROM users;
+
+
+# *faves
+# Let's see what's in the faves table by running:
+
+# SELECT * 
+# FROM faves;
+
+
+# follows
+# Let's see what's in the follows table by running:
+
+# SELECT *  
+# FROM follows;
+
+
+# *tweets
+# Let's see what's in the tweets table by running:
+
+# SELECT *
+# FROM tweets;
+
+
+
+# *Basics
+# What query would you run to get all of the users?
+
+# SELECT * 
+# FROM users;
+
+# What query would you run to only get the first names of all of the users?
+# SELECT first_name 
+# FROM users;
+
+# What query would you run to only get the first and last names of all of the users?
+# SELECT first_name, last_name
+# FROM users;
+
+# SELECT w/ Conditionals
+# What query would you run to only get the first name of users with id of 2?
+
+# SELECT first_name
+# FROM users
+# WHERE id = 2;
+
+# What query would you run to get the last names of users with id of 2 or 3?
+
+# SELECT last_name
+# FROM users
+# WHERE id = 2 OR id = 3;
+
+# What query would you run to get all of the users with id greater than 2?
+# SELECT *
+# FROM users
+# WHERE id > 2;
+
+# What query would you run to get all of the users with id less than or equal to 3?
+# SELECT *
+# FROM users
+# WHERE id <= 3;
+
+# What query would you run to get all of the users with first names ending in "e"?
+# SELECT * 
+# FROM users
+# WHERE first_name LIKE "%e";
+
+# What query would you run to get all of the users with first names starting in "K"?
+# SELECT * 
+# FROM users
+# WHERE first_name LIKE "K%";
+
+# What query would you run to get all of the users with first names not starting in "K"?
+# SELECT * 
+# FROM users
+# WHERE first_name NOT LIKE "K%";
+
+# SELECT w/ Sorting
+# What query would you run to get all of the users with the youngest users at the top of the table?
+
+# SELECT *
+# FROM users
+# ORDER BY birthday DESC;
+
+# What query would you run to get all of the users with the oldest users at the top of the table?
+
+# SELECT *
+# FROM users
+# ORDER BY birthday ASC;
+
+# What query would you run to get all of the users with the first name that ends with "e" with the youngest users at the top of the table?
+
+# SELECT *
+# FROM users
+# WHERE first_name LIKE "%e"
+# ORDER BY birthday DESC;
+
+# What query would you run to get only the first names of all of the users in alphabetical order?
+
+# SELECT first_name
+# FROM users
+# ORDER BY first_name;
+
+# The default for ORDER BY is ASC so we can leave that part out if we want the sorting to be ascending.
+
+# SELECT w/ LIMIT and OFFSET
+# What query would you run to get the first 3 users?
+
+# SELECT *
+# FROM users
+# LIMIT 3;copy
+# What query would you run to get user records 3-5?
+
+# SELECT *
+# FROM users
+# LIMIT 3
+# OFFSET 2;copy
+# You could also combine LIMIT and OFFSET like this:
+
+# SELECT *
+# FROM users
+# LIMIT 2,3;copy
+# Note
+
+# Before moving on to the next tab, it will be best to go over the following tutorials on SQL Zoo:
+
+# SELECT Basics: http://sqlzoo.net/wiki/SQLZOO:SELECT_basics
+# SELECT name: http://sqlzoo.net/wiki/SELECT_names
+# SELECT from World: http://sqlzoo.net/wiki/SELECT_from_WORLD_Tutorial
+
+# *INSERT BASICS:
+
+# Inserting Records
+# The SQL command pattern for INSERTing records is as follows:
+
+# INSERT INTO table_name (column_name1, column_name2) 
+# VALUES('column1_value', 'column2_value');
+
+# *UPDATE BASICS:
+
+# Updating Records
+# The SQL command pattern for updating/editing records is as follows:
+
+# UPDATE table_name
+# SET column1 = value1, column2 = value2, ...
+# WHERE condition;
+
+# IMPORTANT: if WHERE condition is not added to the UPDATE statement, the changes will be applied to every record in the table.
+
+# *DELETE BASICS:
+
+# You can DELETE your records as well.
+
+# If you are getting an error regarding SQL SAFE UPDATES, run the following command to let MySQL Workbench know that you know what you are doing and you want to DELETE stuff from the database.
+
+# SET SQL_SAFE_UPDATES = 0;
+
+# The SQL command pattern for deleting/removing records is as follows:
+
+# DELETE FROM table_name WHERE condition;
+
+# IMPORTANT: if WHERE condition is not added to the DELETE statement, it will delete all the records on the table.
